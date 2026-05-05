@@ -15,8 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QMainWindow,
-    QMenuBar, QSizePolicy, QStatusBar, QWidget)
+from PySide6.QtWidgets import (QApplication, QListWidgetItem, QMainWindow, QMenuBar,
+    QSizePolicy, QStatusBar, QWidget)
+
+from dlistwidget import DListWidget
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -25,13 +27,9 @@ class Ui_MainWindow(object):
         MainWindow.resize(800, 600)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.horizontalLayout = QHBoxLayout(self.centralwidget)
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.label = QLabel(self.centralwidget)
-        self.label.setObjectName(u"label")
-
-        self.horizontalLayout.addWidget(self.label)
-
+        self.listWidget = DListWidget(self.centralwidget)
+        self.listWidget.setObjectName(u"listWidget")
+        self.listWidget.setGeometry(QRect(12, 12, 256, 521))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
@@ -48,6 +46,5 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700; text-decoration: underline; color:#ed6b88;\">Hello</span><span style=\" text-decoration: underline;\"/><span style=\" font-style:italic; text-decoration: underline; color:#61d836;\">World!</span></p></body></html>", None))
     # retranslateUi
 
