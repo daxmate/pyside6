@@ -1,7 +1,9 @@
 # A pyside6 learning project
 
 from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtCore import QFile, QTextStream, QIODevice
 from forms.mainwindow_ui import Ui_MainWindow
+import resources_rc
 
 
 class MainWindow(QMainWindow):
@@ -13,12 +15,14 @@ class MainWindow(QMainWindow):
         self.show()
     
     def load_stylesheet(self):
-        try:
-            with open('styles/listwidget.qss', 'r') as f:
-                stylesheet = f.read()
-                self.ui.listWidget.setStyleSheet(stylesheet)
-        except FileNotFoundError:
-            print("Stylesheet file not found")
+        file = QFile(":/styles/listwidget.qss")
+        if file.open(QIODevice.ReadOnly | QIODevice.Text):
+            stream = QTextStream(file)
+            stylesheet = stream.readAll()
+            self.ui.listWidget.setStyleSheet(stylesheet)
+            file.close()
+        else:
+            print("Stylesheet resource not found")
 
 if __name__ == "__main__":
     app = QApplication([])
